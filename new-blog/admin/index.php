@@ -1,9 +1,3 @@
-<?php
-require_once 'config.php';
-$query = $pdo->prepare("SELECT * FROM blogposts ORDER BY id DESC");
-$query->execute();
-$blogPosts = $query->fetchAll(PDO::FETCH_ASSOC);
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,20 +19,10 @@ $blogPosts = $query->fetchAll(PDO::FETCH_ASSOC);
         </div>
         <div class="row">
             <div class="col-md-8">
-                <?php foreach($blogPosts as $blogPost): ?>
-                    <div class="blog-post">
-                        <h2>
-                            <?php echo $blogPost['title']?>
-                        </h2>
-                        <p>Jueves 17 de mayo de 2018 por <a href="#"><?php echo $blogPost['author']?></a></p>
-                        <div class="blog-post-image">
-                            <img src="<?php echo $blogPost['image']?>" style="width: 100%;"alt="post-1">
-                        </div>
-                        <div class="blog-post-content">
-                            <?php echo $blogPost['content']?>
-                        </div>
-                    </div>
-                <?php endforeach ?>
+                <h2>Admin Panel</h2>
+                <ul>
+                    <li><a href="posts.php">Manage posts</a></li>
+                </ul>
             </div>
             <div class="col-md-4">
                 <h2>Sidebar</h2>
@@ -56,8 +40,7 @@ $blogPosts = $query->fetchAll(PDO::FETCH_ASSOC);
         <div class="row">
             <footer>
                 <div class="col-md-12">
-                    <h5>Footer</h5><br/>
-                    <a href="admin/index.php">Admin panel</a>
+                    <h3>Footer</h3><br/>
                 </div>
             </footer>
         </div>
