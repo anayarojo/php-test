@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Blog</title>
+    <title>Posts</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <!-- Optional theme -->
@@ -19,20 +19,24 @@
         </div>
         <div class="row">
             <div class="col-md-8">
-                <?php foreach($blogPosts as $blogPost): ?>
-                    <div class="blog-post">
-                        <h2>
-                            <?php echo $blogPost['title']?>
-                        </h2>
-                        <p>Jueves 17 de mayo de 2018 por <a href="#"><?php echo $blogPost['author']?></a></p>
-                        <div class="blog-post-image">
-                            <img src="<?php echo $blogPost['image']?>" style="width: 100%;"alt="post-1">
-                        </div>
-                        <div class="blog-post-content">
-                            <?php echo $blogPost['content']?>
-                        </div>
+                <h2>New post</h2>
+                <p><a class="btn btn-default" href="<?php echo BASE_URL;?>posts">Back</a></p>
+                <?php
+                    if(isset($result) && $result) {
+                        echo'<div class="alert alert-success">Post Saved</div>';
+                    }
+                ?>
+                <form action="insert-post.php" method="post">
+                    <div class="form-group">
+                        <label for="inputTitle">Title</label>
+                        <input id="inputTitle" class="form-control" type="text" name="title" />
                     </div>
-                <?php endforeach ?>
+                    <div class="form-group">
+                        <label for="inputContent">Content</label>
+                        <textarea id="inputContent" class="form-control" name="content"></textarea>
+                    </div>
+                    <input type="submit" class="btn btn-primary" value="Save"/>
+                </form>
             </div>
             <div class="col-md-4">
                 <h2>Sidebar</h2>
@@ -50,7 +54,7 @@
         <div class="row">
             <footer>
                 <div class="col-md-12">
-                    <h5>Footer</h5><br/>
+                    <h3>Footer</h3><br/>
                     <a href="<?php echo BASE_URL;?>admin">Admin panel</a>
                 </div>
             </footer>
