@@ -10,3 +10,6 @@
 **/TestResults
 **/packages/*
 **.htm
+/blog/vendor
+/new-blog/vendor
+/mvc-blog/vendor

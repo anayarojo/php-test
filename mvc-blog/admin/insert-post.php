@@ -1,3 +1,16 @@
+<?php
+require_once '../config.php';
+$result = false;
+
+if(!empty($_POST)){
+    $sql = "INSERT INTO blogposts (title, content) VALUES (:title, :content)";
+    $query = $pdo->prepare($sql);
+    $result = $query->execute([
+        'title'=> $_POST['title'],
+        'content'=> $_POST['content']
+    ]);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,13 +33,13 @@
         <div class="row">
             <div class="col-md-8">
                 <h2>New post</h2>
-                <p><a class="btn btn-default" href="<?php echo BASE_URL;?>admin/posts">Back</a></p>
+                <p><a class="btn btn-default" href="posts.php">Back</a></p>
                 <?php
-                    if(isset($result) && $result) {
+                    if($result) {
                         echo'<div class="alert alert-success">Post Saved</div>';
                     }
                 ?>
-                <form method="post">
+                <form action="insert-post.php" method="post">
                     <div class="form-group">
                         <label for="inputTitle">Title</label>
                         <input id="inputTitle" class="form-control" type="text" name="title" />
@@ -55,7 +68,7 @@
             <footer>
                 <div class="col-md-12">
                     <h3>Footer</h3><br/>
-                    <a href="<?php echo BASE_URL;?>admin">Admin panel</a>
+                    <a href="index.php">Admin panel</a>
                 </div>
             </footer>
         </div>
