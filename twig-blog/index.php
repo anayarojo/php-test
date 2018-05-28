@@ -1,10 +1,16 @@
+<?php
+require_once 'config.php';
+$query = $pdo->prepare("SELECT * FROM blogposts ORDER BY id DESC");
+$query->execute();
+$blogPosts = $query->fetchAll(PDO::FETCH_ASSOC);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Posts</title>
+    <title>Blog</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <!-- Optional theme -->
@@ -19,22 +25,20 @@
         </div>
         <div class="row">
             <div class="col-md-8">
-                <h2>Posts</h2>
-                <p><a class="btn btn-primary" href="<?php echo BASE_URL;?>admin/post/create">New post</a></p>
-                <table class="table">
-                    <tr>
-                        <th>Title</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                    </tr>
-                    <?php foreach($blogPosts as $blogPost): ?>
-                        <tr>
-                            <td><?php echo $blogPost['title'] ?></td>
-                            <td><a href="">Edit</a></td>
-                            <td><a href="">Delete</a></td>
-                        </tr>
-                    <?php endforeach ?>
-                </table>
+                <?php foreach($blogPosts as $blogPost): ?>
+                    <div class="blog-post">
+                        <h2>
+                            <?php echo $blogPost['title']?>
+                        </h2>
+                        <p>Jueves 17 de mayo de 2018 por <a href="#"><?php echo $blogPost['author']?></a></p>
+                        <div class="blog-post-image">
+                            <img src="<?php echo $blogPost['image']?>" style="width: 100%;"alt="post-1">
+                        </div>
+                        <div class="blog-post-content">
+                            <?php echo $blogPost['content']?>
+                        </div>
+                    </div>
+                <?php endforeach ?>
             </div>
             <div class="col-md-4">
                 <h2>Sidebar</h2>
@@ -52,8 +56,8 @@
         <div class="row">
             <footer>
                 <div class="col-md-12">
-                    <h3>Footer</h3><br/>
-                    <a href="<?php echo BASE_URL;?>admin">Admin panel</a>
+                    <h5>Footer</h5><br/>
+                    <a href="admin/index.php">Admin panel</a>
                 </div>
             </footer>
         </div>

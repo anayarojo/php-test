@@ -19,22 +19,24 @@
         </div>
         <div class="row">
             <div class="col-md-8">
-                <h2>Posts</h2>
-                <p><a class="btn btn-primary" href="<?php echo BASE_URL;?>admin/post/create">New post</a></p>
-                <table class="table">
-                    <tr>
-                        <th>Title</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                    </tr>
-                    <?php foreach($blogPosts as $blogPost): ?>
-                        <tr>
-                            <td><?php echo $blogPost['title'] ?></td>
-                            <td><a href="">Edit</a></td>
-                            <td><a href="">Delete</a></td>
-                        </tr>
-                    <?php endforeach ?>
-                </table>
+                <h2>New post</h2>
+                <p><a class="btn btn-default" href="<?php echo BASE_URL;?>admin/posts">Back</a></p>
+                <?php
+                    if(isset($result) && $result) {
+                        echo'<div class="alert alert-success">Post Saved</div>';
+                    }
+                ?>
+                <form method="post">
+                    <div class="form-group">
+                        <label for="inputTitle">Title</label>
+                        <input id="inputTitle" class="form-control" type="text" name="title" />
+                    </div>
+                    <div class="form-group">
+                        <label for="inputContent">Content</label>
+                        <textarea id="inputContent" class="form-control" name="content"></textarea>
+                    </div>
+                    <input type="submit" class="btn btn-primary" value="Save"/>
+                </form>
             </div>
             <div class="col-md-4">
                 <h2>Sidebar</h2>
